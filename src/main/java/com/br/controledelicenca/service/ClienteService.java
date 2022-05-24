@@ -25,7 +25,7 @@ public class ClienteService {
         return repository.save(ClienteMapper.INSTANCE.toCliente(clientePostRequestBody));
     }
 
-    public Page<Cliente> listarTodos(Pageable pageable) {
+    public Page<Cliente> listarTodosClientes(Pageable pageable) {
         return repository.findAll(pageable);
     }
 
@@ -33,5 +33,9 @@ public class ClienteService {
         Optional<Cliente> cliente = repository.findById(id);
         repository.findById(id).orElseThrow(() -> new BadRequestException("Cliente not found"));
         return cliente.orElseThrow();
+    }
+
+    public void deletarCliente(Long id) {
+        repository.delete(findByIdOrThrowBadRequestException(id));
     }
 }

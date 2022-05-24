@@ -1,4 +1,4 @@
-package com.br.controledelicenca.api;
+package com.br.controledelicenca.api.resource;
 
 import com.br.controledelicenca.domain.Cliente;
 import com.br.controledelicenca.request.ClientePostRequestBody;
@@ -27,11 +27,17 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<Page<Cliente>> listar(Pageable pageable){
-        return ResponseEntity.ok(service.listarTodos(pageable));
+        return ResponseEntity.ok(service.listarTodosClientes(pageable));
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Cliente> findById(@PathVariable Long id){
         return ResponseEntity.ok(service.findByIdOrThrowBadRequestException(id));
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        service.deletarCliente(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
