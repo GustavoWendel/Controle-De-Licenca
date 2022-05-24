@@ -2,6 +2,7 @@ package com.br.controledelicenca.api.resource;
 
 import com.br.controledelicenca.domain.Cliente;
 import com.br.controledelicenca.request.ClientePostRequestBody;
+import com.br.controledelicenca.request.ClientePutRequestBody;
 import com.br.controledelicenca.service.ClienteService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,12 @@ public class ClienteController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id){
         service.deletarCliente(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> atualizar(@RequestBody ClientePutRequestBody clientePutRequestBody) {
+        service.atualizarCliente(clientePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

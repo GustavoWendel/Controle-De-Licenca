@@ -5,6 +5,7 @@ import com.br.controledelicenca.exceptions.BadRequestException;
 import com.br.controledelicenca.mapper.ClienteMapper;
 import com.br.controledelicenca.repository.ClienteRepository;
 import com.br.controledelicenca.request.ClientePostRequestBody;
+import com.br.controledelicenca.request.ClientePutRequestBody;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,5 +38,12 @@ public class ClienteService {
 
     public void deletarCliente(Long id) {
         repository.delete(findByIdOrThrowBadRequestException(id));
+    }
+
+    public void atualizarCliente(ClientePutRequestBody clientePutRequestBody) {
+        Cliente clienteSalvo = findByIdOrThrowBadRequestException(clientePutRequestBody.getId());
+        Cliente cliente = ClienteMapper.INSTANCE.toCliente(clientePutRequestBody);
+        cliente.setId(clienteSalvo.getId());
+        repository.save(cliente);
     }
 }
