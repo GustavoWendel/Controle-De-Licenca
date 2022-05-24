@@ -1,18 +1,45 @@
 package com.br.controledelicenca.request;
 
-import lombok.Data;
+import javax.validation.constraints.NotNull;
 
-import javax.validation.constraints.*;
-
-@Data
 public class ClientePostRequestBody {
-    @NotEmpty(message = "O nome não pode estar vazio")
-    @NotNull(message = "O nome não pode ser nulo")
+
+    @NotNull
     private String nome;
-    @NotEmpty(message = "O Cnpj não pode estar vazio")
-    @NotNull(message = "O Cnpj não pode ser nulo")
+    @NotNull
     private String cnpj;
-    @NotEmpty(message = "O e-mail  não pode estar vazio")
-    @NotNull(message = "O e-mail não pode ser nulo")
+    @NotNull
     private String email;
+
+    public ClientePostRequestBody(String nome, String cnpj, String email) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
 }

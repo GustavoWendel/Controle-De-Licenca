@@ -6,7 +6,7 @@ import com.br.controledelicenca.mapper.ClienteMapper;
 import com.br.controledelicenca.repository.ClienteRepository;
 import com.br.controledelicenca.request.ClientePostRequestBody;
 import com.br.controledelicenca.request.ClientePutRequestBody;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ClienteService {
 
     private final ClienteRepository repository;
