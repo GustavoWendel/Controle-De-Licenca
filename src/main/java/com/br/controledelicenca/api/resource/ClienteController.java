@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/cliente")
 @RequiredArgsConstructor
@@ -21,7 +23,7 @@ public class ClienteController {
     private final ClienteService service;
 
     @PostMapping
-    public ResponseEntity<Cliente> salvar(@RequestBody ClientePostRequestBody clientePostRequestBody) {
+    public ResponseEntity<Cliente> salvar(@RequestBody @Valid ClientePostRequestBody clientePostRequestBody) {
         return new ResponseEntity<>(service.salvarCliente(clientePostRequestBody), HttpStatus.CREATED);
     }
 
