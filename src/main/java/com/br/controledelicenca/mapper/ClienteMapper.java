@@ -8,11 +8,12 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public abstract class ClienteMapper {
+
     public static final ClienteMapper INSTANCE = Mappers.getMapper(ClienteMapper.class);
 
-    public abstract Cliente toCliente(ClientePostRequestBody ClientePostRequestBody);
+    public abstract Cliente toCliente(ClientePostRequestBody clientePostRequestBody);
 
-    public abstract Cliente toCliente(ClientePutRequestBody ClientePutRequestBody);
+    public abstract Cliente toCliente(ClientePutRequestBody clientePutRequestBody);
 }
 
 

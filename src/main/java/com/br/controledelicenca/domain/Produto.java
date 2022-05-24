@@ -22,7 +22,4 @@ public class Produto implements Serializable {
     private Long id;
     private String nome;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Produto> produtos;
-
 }

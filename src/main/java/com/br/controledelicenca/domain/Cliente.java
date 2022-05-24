@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,9 @@ public class Cliente implements Serializable {
     private String nome;
     private String cnpj;
     private String email;
+
+    /*@OneToMany(cascade = CascadeType.ALL)
+    private List<Produto> produtos;*/
 
 
 }
