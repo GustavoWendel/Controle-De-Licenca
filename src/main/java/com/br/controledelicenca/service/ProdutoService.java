@@ -1,12 +1,10 @@
 package com.br.controledelicenca.service;
 
 import com.br.controledelicenca.domain.Produto;
-import com.br.controledelicenca.exceptions.BadRequestException;
-import com.br.controledelicenca.mapper.ProdutoMapper;
 import com.br.controledelicenca.repository.ProdutoRepository;
-import com.br.controledelicenca.request.ProdutoPostRequestBody;
-import com.br.controledelicenca.request.ProdutoPutRequestBody;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,32 +15,41 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ProdutoService {
+    
     private final ProdutoRepository repository;
 
     @Transactional
-    public Produto salvarProduto(ProdutoPostRequestBody produtoPostRequestBody) {
-        ProdutoMapper.INSTANCE.toProduto(produtoPostRequestBody);
-        return repository.save(ProdutoMapper.INSTANCE.toProduto(produtoPostRequestBody));
+    public Produto salvarProduto(Produto Produto) {
+        return repository.save(Produto);
     }
 
-    public Page<Produto> listarTodosProdutos(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Produto> listarTodosProdutos(Produto filter, Pageable pageableRequest) {
+
+        Example<Produto> example = Example.of(filter, ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withIgnoreNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+        );
+
+        return repository.findAll(example, pageableRequest);
     }
 
-    public Produto findByIdOrThrowBadRequestException(Long id) {
-        Optional<Produto> produto = repository.findById(id);
-        repository.findById(id).orElseThrow(() -> new BadRequestException("Produto not found"));
-        return produto.orElseThrow();
+    public Optional<Produto> buscaPorId(Long id) {
+        return this.repository.findById(id);
     }
 
-    public void deletarProduto(Long id) {
-        repository.delete(findByIdOrThrowBadRequestException(id));
+    public void deletarProduto(Produto produto) {
+        if (produto == null || produto.getId() == null) {
+            throw new IllegalArgumentException("Id de Produto não pode ser nulo");
+        }
+        this.repository.delete(produto);
     }
 
-    public void atualizarProduto(ProdutoPutRequestBody produtoPutRequestBody) {
-        Produto produtoSalvo = findByIdOrThrowBadRequestException(produtoPutRequestBody.getId());
-        Produto produto = ProdutoMapper.INSTANCE.toProduto(produtoPutRequestBody);
-        produto.setId(produtoSalvo.getId());
-        repository.save(produto);
+    public Produto atualizarProduto(Produto produto) {
+        if (produto == null || produto.getId() == null) {
+            throw new IllegalArgumentException("Id de Produto não pode ser nulo");
+        }
+        return this.repository.save(produto);
     }
 }

@@ -1,16 +1,21 @@
 package com.br.controledelicenca.api.resource;
 
 import com.br.controledelicenca.domain.Produto;
-import com.br.controledelicenca.request.ProdutoPostRequestBody;
-import com.br.controledelicenca.request.ProdutoPutRequestBody;
+import com.br.controledelicenca.request.ProdutoDto;
 import com.br.controledelicenca.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/produto")
@@ -18,32 +23,50 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 public class ProdutoController {
 
-    private final ProdutoService produtoService;
+    private final ModelMapper mapper;
+
+    private final ProdutoService service;
 
     @PostMapping
-    public ResponseEntity<Produto> salvar(@RequestBody ProdutoPostRequestBody produtoPostRequestBody) {
-        return new ResponseEntity<>(produtoService.salvarProduto(produtoPostRequestBody), HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProdutoDto salvar(@RequestBody @Valid ProdutoDto dto) {
+        Produto entity = mapper.map(dto, Produto.class);
+        entity = service.salvarProduto(entity);
+        return mapper.map(entity, ProdutoDto.class);
     }
 
     @GetMapping
-    public ResponseEntity<Page<Produto>> listar(Pageable pageable){
-        return ResponseEntity.ok(produtoService.listarTodosProdutos(pageable));
+    public Page<ProdutoDto> find(ProdutoDto dto, Pageable pageRequest) {
+        Produto filter = mapper.map(dto, Produto.class);
+        Page<Produto> result = service.listarTodosProdutos(filter, pageRequest);
+        List<ProdutoDto> list = result.getContent()
+                .stream()
+                .map(entity -> mapper.map(entity, ProdutoDto.class))
+                .collect(Collectors.toList());
+        return new PageImpl<>(list, pageRequest, result.getTotalElements());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Produto> findById(@PathVariable Long id){
-        return ResponseEntity.ok(produtoService.findByIdOrThrowBadRequestException(id));
+    public ProdutoDto findById(@PathVariable Long id) {
+        return service
+                .buscaPorId(id)
+                .map(produto -> mapper.map(produto, ProdutoDto.class))
+                .orElseThrow((() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id){
-        produtoService.deletarProduto(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable Long id) {
+        Produto produto = service.buscaPorId(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        service.deletarProduto(produto);
     }
 
-    @PutMapping
-    public ResponseEntity<Void> atualizar(@RequestBody ProdutoPutRequestBody produtoPutRequestBody) {
-        produtoService.atualizarProduto(produtoPutRequestBody);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @PutMapping("{id}")
+    public ProdutoDto atualizar(@RequestBody @PathVariable Long id, @RequestBody @Valid ProdutoDto dto) {
+        return service.buscaPorId(id).map(produto -> {
+            produto.setNome(dto.getNome());
+            service.atualizarProduto(produto);
+            return mapper.map(produto, ProdutoDto.class);
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }

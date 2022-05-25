@@ -1,11 +1,17 @@
 package com.br.controledelicenca.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name= "table_produto")
 public class Produto implements Serializable {
     private static final long serialVersionUID = -3656431259068389491L;
@@ -16,14 +22,6 @@ public class Produto implements Serializable {
     private Long id;
     private String nome;
 
-    public Produto(Long id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
-
-    public Produto() {
-
-    }
 
     public Long getId() {
         return id;

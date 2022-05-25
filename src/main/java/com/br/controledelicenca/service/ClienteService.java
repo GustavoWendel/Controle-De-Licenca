@@ -1,12 +1,10 @@
 package com.br.controledelicenca.service;
 
 import com.br.controledelicenca.domain.Cliente;
-import com.br.controledelicenca.exceptions.BadRequestException;
-import com.br.controledelicenca.mapper.ClienteMapper;
 import com.br.controledelicenca.repository.ClienteRepository;
-import com.br.controledelicenca.request.ClientePostRequestBody;
-import com.br.controledelicenca.request.ClientePutRequestBody;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,29 +19,37 @@ public class ClienteService {
     private final ClienteRepository repository;
 
     @Transactional
-    public Cliente salvarCliente(ClientePostRequestBody clientePostRequestBody) {
-        ClienteMapper.INSTANCE.toCliente(clientePostRequestBody);
-        return repository.save(ClienteMapper.INSTANCE.toCliente(clientePostRequestBody));
+    public Cliente salvarCliente(Cliente cliente) {
+        return repository.save(cliente);
     }
 
-    public Page<Cliente> listarTodosClientes(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<Cliente> listarTodosClientes(Cliente filter, Pageable pageableRequest) {
+
+        Example<Cliente> example = Example.of(filter, ExampleMatcher
+                .matching()
+                .withIgnoreCase()
+                .withIgnoreNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+        );
+
+        return repository.findAll(example, pageableRequest);
     }
 
-    public Cliente findByIdOrThrowBadRequestException(Long id) {
-        Optional<Cliente> cliente = repository.findById(id);
-        repository.findById(id).orElseThrow(() -> new BadRequestException("Cliente not found"));
-        return cliente.orElseThrow();
+    public Optional<Cliente> buscaPorId(Long id) {
+        return this.repository.findById(id);
     }
 
-    public void deletarCliente(Long id) {
-        repository.delete(findByIdOrThrowBadRequestException(id));
+    public void deletarCliente(Cliente cliente) {
+        if (cliente == null || cliente.getId() == null) {
+            throw new IllegalArgumentException("Id de cliente não pode ser nulo");
+        }
+        this.repository.delete(cliente);
     }
 
-    public void atualizarCliente(ClientePutRequestBody clientePutRequestBody) {
-        Cliente clienteSalvo = findByIdOrThrowBadRequestException(clientePutRequestBody.getId());
-        Cliente cliente = ClienteMapper.INSTANCE.toCliente(clientePutRequestBody);
-        cliente.setId(clienteSalvo.getId());
-        repository.save(cliente);
+    public Cliente atualizarCliente(Cliente cliente) {
+        if (cliente == null || cliente.getId() == null) {
+            throw new IllegalArgumentException("Id de cliente não pode ser nulo");
+        }
+        return this.repository.save(cliente);
     }
 }

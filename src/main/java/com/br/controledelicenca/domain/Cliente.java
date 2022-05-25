@@ -1,10 +1,17 @@
 package com.br.controledelicenca.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "table_cliente")
 public class Cliente implements Serializable {
 
@@ -18,12 +25,16 @@ public class Cliente implements Serializable {
     private String cnpj;
     private String email;
 
+    private String cep;
+
+    private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
+
     /*@OneToMany(cascade = CascadeType.ALL)
     private List<Produto> produtos;*/
-
-    public Cliente() {
-
-    }
 
     public Long getId() {
         return id;
