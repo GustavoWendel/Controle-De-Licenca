@@ -27,6 +27,8 @@ mvn clean install
 
 O comando irá baixar todas as dependências do projeto e criar um diretório target com os artefatos construídos, que incluem o arquivo jar do projeto. Além disso, serão executados os testes unitários, e se algum falhar, o Maven exibirá essa informação no console.
 
+Após o projeto rodar, acessar o swagger através da URL para ter acesso a documentação das API's: http://localhost:8080/swagger-ui/index.html
+
 ### Features
 
 O projeto pode ser usado para controlar clientes, produtos e licenças adquiridas destes produtos numa empresa.
