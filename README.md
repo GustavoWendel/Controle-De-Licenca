@@ -1,6 +1,6 @@
 # Controle-De-Licenca
 
-Um parágrafo da descrição do projeto vai aqui
+Trata-se de uma API que controla a licença de vários produtos dos vários clientes de uma empresa.
 
 ## 🚀 Começando
 
@@ -12,9 +12,9 @@ Consulte **Implantação** para saber como implantar o projeto.
 
 De que coisas você precisa para instalar o software e como instalá-lo?
 
-```
-Dar exemplos
-```
+Maven 3.0x
+Java 11 JDK 
+PostgreSQL
 
 ### 🔧 Instalação
 
@@ -85,7 +85,7 @@ Você também pode ver a lista de todos os [colaboradores](https://github.com/us
 
 ## 📄 Licença
 
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
+Este projeto está sob a licença (Gustavi Wendel) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
 
 ## 🎁 Expressões de gratidão
 
