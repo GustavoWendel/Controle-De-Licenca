@@ -18,7 +18,6 @@ public class ClienteService {
 
     private final ClienteRepository repository;
 
-    @Transactional
     public Cliente salvarCliente(Cliente cliente) {
         return repository.save(cliente);
     }

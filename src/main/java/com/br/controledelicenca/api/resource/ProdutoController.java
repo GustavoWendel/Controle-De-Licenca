@@ -3,6 +3,7 @@ package com.br.controledelicenca.api.resource;
 import com.br.controledelicenca.domain.Produto;
 import com.br.controledelicenca.request.ProdutoDto;
 import com.br.controledelicenca.service.ProdutoService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/produto")
+@RequestMapping("/api/produtos")
 @RequiredArgsConstructor
 @Log4j2
 public class ProdutoController {
@@ -36,7 +37,7 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public Page<ProdutoDto> find(ProdutoDto dto, Pageable pageRequest) {
+    public Page<ProdutoDto> find(ProdutoDto dto, @Parameter(hidden = true) Pageable pageRequest) {
         Produto filter = mapper.map(dto, Produto.class);
         Page<Produto> result = service.listarTodosProdutos(filter, pageRequest);
         List<ProdutoDto> list = result.getContent()

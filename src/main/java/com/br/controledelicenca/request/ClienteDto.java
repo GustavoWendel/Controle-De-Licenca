@@ -13,13 +13,13 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class ClienteDto {
 
+    private Long id;
+
     @NotNull
     private String nome;
     @NotNull
     private String cnpj;
     @NotNull
     private String email;
-    @NotNull
-    private String cep;
 
 }

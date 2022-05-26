@@ -3,6 +3,7 @@ package com.br.controledelicenca.api.resource;
 import com.br.controledelicenca.domain.Cliente;
 import com.br.controledelicenca.request.ClienteDto;
 import com.br.controledelicenca.service.ClienteService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/cliente")
+@RequestMapping("api/clientes")
 @RequiredArgsConstructor
 @Log4j2
 public class ClienteController {
@@ -36,7 +37,7 @@ public class ClienteController {
     }
 
     @GetMapping
-    public Page<ClienteDto> find(ClienteDto dto, Pageable pageRequest) {
+    public Page<ClienteDto> find(ClienteDto dto, @Parameter(hidden = true) Pageable pageRequest) {
         Cliente filter = mapper.map(dto, Cliente.class);
         Page<Cliente> result = service.listarTodosClientes(filter, pageRequest);
         List<ClienteDto> list = result.getContent()
@@ -61,7 +62,7 @@ public class ClienteController {
         service.deletarCliente(cliente);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ClienteDto atualizar(@RequestBody @PathVariable Long id, @RequestBody @Valid ClienteDto dto) {
         return service.buscaPorId(id).map(cliente -> {
             cliente.setNome(dto.getNome());

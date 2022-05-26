@@ -27,14 +27,6 @@ public class Cliente implements Serializable {
     private String cnpj;
     private String email;
 
-    private String cep;
-
-    private String logradouro;
-    private String complemento;
-    private String bairro;
-    private String localidade;
-    private String uf;
-
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Produto> produtos;
 

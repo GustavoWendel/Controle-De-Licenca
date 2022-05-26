@@ -24,7 +24,6 @@ import static org.mockito.Mockito.*;
 @ActiveProfiles("test")
 public class ClienteServiceTest {
 
-    @Autowired
     private ClienteService service;
 
     @MockBean
@@ -140,9 +139,9 @@ public class ClienteServiceTest {
 
         //Verificações
         assertThat(cliente.getId()).isEqualTo(id);
-        assertThat(cliente.getNome()).isEqualTo(cliente.getNome());
-        assertThat(cliente.getCnpj()).isEqualTo(cliente.getCnpj());
-        assertThat(cliente.getEmail()).isEqualTo(cliente.getEmail());
+        assertThat(cliente.getNome()).isEqualTo(clienteAtualizado.getNome());
+        assertThat(cliente.getCnpj()).isEqualTo(clienteAtualizado.getCnpj());
+        assertThat(cliente.getEmail()).isEqualTo(clienteAtualizado.getEmail());
 
     }
 

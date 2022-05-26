@@ -25,7 +25,6 @@ import static org.mockito.Mockito.*;
 @ActiveProfiles("test")
 public class ProdutoServiceTest {
 
-    @Autowired
     private ProdutoService service;
 
     @MockBean
@@ -125,17 +124,17 @@ public class ProdutoServiceTest {
         Produto atualizandoProduto = Produto.builder().id(id).build();
 
         //Simulação
-        Produto ProdutoAtualizado = criarProdutoValido();
-        ProdutoAtualizado.setId(id);
+        Produto produtoAtualizado = criarProdutoValido();
+        produtoAtualizado.setId(id);
 
-        when(repository.save(atualizandoProduto)).thenReturn(ProdutoAtualizado);
+        when(repository.save(atualizandoProduto)).thenReturn(produtoAtualizado);
 
         //Execução
-        Produto Produto = service.atualizarProduto(atualizandoProduto);
+        Produto produto = service.atualizarProduto(atualizandoProduto);
 
         //Verificações
-        assertThat(Produto.getId()).isEqualTo(id);
-        assertThat(Produto.getNome()).isEqualTo(Produto.getNome());
+        assertThat(produto.getId()).isEqualTo(id);
+        assertThat(produto.getNome()).isEqualTo(produtoAtualizado.getNome());
 
     }
 

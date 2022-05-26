@@ -3,6 +3,7 @@ package com.br.controledelicenca.api.resource;
 import com.br.controledelicenca.domain.Licenca;
 import com.br.controledelicenca.request.LicencaDto;
 import com.br.controledelicenca.service.LicencaService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/Licenca")
+@RequestMapping("/api/licencas")
 @RequiredArgsConstructor
 @Log4j2
 public class LicencaController {
@@ -36,7 +37,7 @@ public class LicencaController {
     }
 
     @GetMapping
-    public Page<LicencaDto> find(LicencaDto dto, Pageable pageRequest) {
+    public Page<LicencaDto> find(LicencaDto dto, @Parameter(hidden = true) Pageable pageRequest) {
         Licenca filter = mapper.map(dto, Licenca.class);
         Page<Licenca> result = service.listarTodasLicencas(filter, pageRequest);
         List<LicencaDto> list = result.getContent()
@@ -61,7 +62,7 @@ public class LicencaController {
         service.deletarLicenca(licenca);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public LicencaDto atualizar(@RequestBody @PathVariable Long id, @RequestBody @Valid LicencaDto dto) {
         return service.buscaPorId(id).map(licenca -> {
             licenca.setDataInicio(dto.getDataInicio());
