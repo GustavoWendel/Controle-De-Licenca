@@ -1,95 +1,49 @@
 # Controle-De-Licenca
 
-Um parágrafo da descrição do projeto vai aqui
+Trata-se de uma API que controla a licença de vários produtos dos vários clientes de uma empresa.
 
-## 🚀 Começando
+### Começando
 
-Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
+Para executar o projeto, será necessário instalar os seguintes programas:
 
-Consulte **Implantação** para saber como implantar o projeto.
+JDK 11: Necessário para executar o projeto Java
+Maven 3.8.3: Necessário para realizar o build do projeto Java
+Eclipse: Para desenvolvimento do projeto
+PostgreSQL 9.5
 
-### 📋 Pré-requisitos
+### Desenvolvimento
 
-De que coisas você precisa para instalar o software e como instalá-lo?
+Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub num diretório de sua preferência:
 
-```
-Dar exemplos
-```
+cd "diretorio de sua preferencia"
 
-### 🔧 Instalação
+git clone https://github.com/GustavoWendel/Controle-De-Licenca.git
 
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
+### Construção
 
-Diga como essa etapa será:
+Para construir o projeto com o Maven, executar os comando abaixo:
 
-```
-Dar exemplos
-```
+mvn clean install
 
-E repita:
+O comando irá baixar todas as dependências do projeto e criar um diretório target com os artefatos construídos, que incluem o arquivo jar do projeto. Além disso, serão executados os testes unitários, e se algum falhar, o Maven exibirá essa informação no console.
 
-```
-Até finalizar
-```
+### Features
 
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
+O projeto pode ser usado para controlar clientes, produtos e licenças adquiridas destes produtos numa empresa.
 
-## ⚙️ Executando os testes
+### Configuração
 
-Explicar como executar os testes automatizados para este sistema.
+Para executar o projeto, é necessário utilizar o Eclipse, para que o mesmo identifique as dependências necessárias para a execução no repositório .m2 do Maven. Uma vez importado o projeto, será criado um arquivo .classpath que irá informar qual a classe principal para a execução.
 
-### 🔩 Analise os testes de ponta a ponta
+### Testes
+Para rodar os testes, utilize o comando abaixo:
 
-Explique que eles verificam esses testes e porquê.
+mvn test
 
-```
-Dar exemplos
-```
+### Contribuições
 
-### ⌨️ E testes de estilo de codificação
+Contribuições são sempre bem-vindas! Para contribuir lembre-se sempre de adicionar testes unitários para as novas classes com a devida documentação.
 
-Explique que eles verificam esses testes e porquê.
+### Licença
 
-```
-Dar exemplos
-```
-
-## 📦 Desenvolvimento
-
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
-
-## 🛠️ Construído com
-
-Mencione as ferramentas que você usou para criar seu projeto
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
-* [Maven](https://maven.apache.org/) - Gerente de Dependência
-* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
-
-## 🖇️ Colaborando
-
-Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
-
-## 📌 Versão
-
-Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/suas/tags/do/projeto). 
-
-## ✒️ Autores
-
-Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
-
-* **Um desenvolvedor** - *Trabalho Inicial* - [umdesenvolvedor](https://github.com/linkParaPerfil)
-* **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
-
-Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
-
-## 📄 Licença
-
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
-
-## 🎁 Expressões de gratidão
-
-* Conte a outras pessoas sobre este projeto 📢
-* Convide alguém da equipe para uma cerveja 🍺 
-* Obrigado publicamente 🤓.
-* etc.
+Não se aplica.
