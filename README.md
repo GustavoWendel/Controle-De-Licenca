@@ -13,7 +13,9 @@ Consulte **Implantação** para saber como implantar o projeto.
 De que coisas você precisa para instalar o software e como instalá-lo?
 
 Maven 3.0x
+
 Java 11 JDK 
+
 PostgreSQL
 
 ### 🔧 Instalação
