@@ -6,9 +6,10 @@ Trata-se de uma API que controla a licença de vários produtos dos vários clie
 
 Para executar o projeto, será necessário instalar os seguintes programas:
 
-JDK 10: Necessário para executar o projeto Java
-Maven 3.5.3: Necessário para realizar o build do projeto Java
+JDK 11: Necessário para executar o projeto Java
+Maven 3.8.3: Necessário para realizar o build do projeto Java
 Eclipse: Para desenvolvimento do projeto
+PostgreSQL 9.5
 
 ### Desenvolvimento
 
