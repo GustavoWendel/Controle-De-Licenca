@@ -7,8 +7,11 @@ Trata-se de uma API que controla a licença de vários produtos dos vários clie
 Para executar o projeto, será necessário instalar os seguintes programas:
 
 JDK 11: Necessário para executar o projeto Java
+
 Maven 3.8.3: Necessário para realizar o build do projeto Java
+
 Eclipse: Para desenvolvimento do projeto
+
 PostgreSQL 9.5
 
 ### Desenvolvimento
@@ -26,6 +29,8 @@ Para construir o projeto com o Maven, executar os comando abaixo:
 mvn clean install
 
 O comando irá baixar todas as dependências do projeto e criar um diretório target com os artefatos construídos, que incluem o arquivo jar do projeto. Além disso, serão executados os testes unitários, e se algum falhar, o Maven exibirá essa informação no console.
+
+Após o projeto rodar, acessar o swagger através da URL para ter acesso a documentação das API's: http://localhost:8080/swagger-ui/index.html
 
 ### Features
 
