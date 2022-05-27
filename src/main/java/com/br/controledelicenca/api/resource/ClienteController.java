@@ -3,10 +3,10 @@ package com.br.controledelicenca.api.resource;
 import com.br.controledelicenca.domain.Cliente;
 import com.br.controledelicenca.request.ClienteDto;
 import com.br.controledelicenca.service.ClienteService;
-import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +37,7 @@ public class ClienteController {
     }
 
     @GetMapping
-    public Page<ClienteDto> find(ClienteDto dto, @Parameter(hidden = true) Pageable pageRequest) {
+    public Page<ClienteDto> find(ClienteDto dto, @ParameterObject Pageable pageRequest) {
         Cliente filter = mapper.map(dto, Cliente.class);
         Page<Cliente> result = service.listarTodosClientes(filter, pageRequest);
         List<ClienteDto> list = result.getContent()

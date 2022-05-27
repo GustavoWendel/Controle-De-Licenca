@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +38,7 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public Page<ProdutoDto> find(ProdutoDto dto, @Parameter(hidden = true) Pageable pageRequest) {
+    public Page<ProdutoDto> find(ProdutoDto dto, @ParameterObject Pageable pageRequest) {
         Produto filter = mapper.map(dto, Produto.class);
         Page<Produto> result = service.listarTodosProdutos(filter, pageRequest);
         List<ProdutoDto> list = result.getContent()

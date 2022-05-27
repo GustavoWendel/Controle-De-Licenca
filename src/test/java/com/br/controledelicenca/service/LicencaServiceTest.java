@@ -98,7 +98,7 @@ class LicencaServiceTest {
 
 
     @Test
-    @DisplayName("Deve deletar um Licenca")
+    @DisplayName("Deve deletar uma Licenca")
     public void deletarLicencaTest() {
         //Cenário
         Licenca licenca = Licenca.builder()
@@ -113,7 +113,7 @@ class LicencaServiceTest {
     }
 
     @Test
-    @DisplayName("Deve ocorrer erro ao tentar deletar um Licenca inexistente.")
+    @DisplayName("Deve ocorrer erro ao tentar deletar uma licença inexistente.")
     public void deletarLicencaInvalidoTest() {
         //Cenário
         Licenca Licenca = new Licenca();
@@ -124,7 +124,7 @@ class LicencaServiceTest {
     }
 
     @Test
-    @DisplayName("Deve atualizar um Licenca ")
+    @DisplayName("Deve atualizar uma licença ")
     public void atualizarLicencaTest() throws ParseException {
         //Cenário
         long id = 1L;
@@ -149,7 +149,7 @@ class LicencaServiceTest {
     }
 
     @Test
-    @DisplayName("Deve ocorrer erro ao tentar atualizar uma Licenca inexistente.")
+    @DisplayName("Deve ocorrer erro ao tentar atualizar uma licença inexistente.")
     public void atualizarLicencaInvalidoTest() {
         //Cenário
         Licenca licenca = new Licenca();
@@ -160,7 +160,7 @@ class LicencaServiceTest {
     }
 
     @Test
-    @DisplayName("Deve filtrar as Licencas pelas propriedades")
+    @DisplayName("Deve filtrar as licenças pelas propriedades")
     public void buscarLicencaTest() throws ParseException {
         //Cenário
         Licenca licenca = criarLicencaValida();

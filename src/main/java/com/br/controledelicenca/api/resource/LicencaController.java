@@ -3,10 +3,10 @@ package com.br.controledelicenca.api.resource;
 import com.br.controledelicenca.domain.Licenca;
 import com.br.controledelicenca.request.LicencaDto;
 import com.br.controledelicenca.service.LicencaService;
-import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +37,7 @@ public class LicencaController {
     }
 
     @GetMapping
-    public Page<LicencaDto> find(LicencaDto dto, @Parameter(hidden = true) Pageable pageRequest) {
+    public Page<LicencaDto> find(LicencaDto dto, @ParameterObject Pageable pageRequest) {
         Licenca filter = mapper.map(dto, Licenca.class);
         Page<Licenca> result = service.listarTodasLicencas(filter, pageRequest);
         List<LicencaDto> list = result.getContent()

@@ -29,4 +29,5 @@ public class Licenca {
 
     @OneToMany(mappedBy = "licenca", cascade = CascadeType.ALL)
     private Set<Produto> produtos;
+
 }
